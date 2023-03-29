@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Slot } from 'expo-router'
+import { StyleSheet, View } from 'react-native'
 
-const Home = () => {
+const Layout = () => {
   return (
     <View style={styles.container}>
-      <Text>Discover books</Text>
+      <Slot />
     </View>
   )
 }
@@ -14,4 +15,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Home
+export default Layout

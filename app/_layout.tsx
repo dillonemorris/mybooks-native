@@ -1,24 +1,27 @@
 import { Tabs } from 'expo-router'
 import Svg, { Path } from 'react-native-svg'
+import { ThemeProvider, DefaultTheme } from '@react-navigation/native'
 
-export default function AppLayout() {
+const AppLayout = () => {
   return (
-    <Tabs>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: IconHome,
-        }}
-      />
-      <Tabs.Screen
-        name="mybooks/index"
-        options={{
-          title: 'My Books',
-          tabBarIcon: IconBook,
-        }}
-      />
-    </Tabs>
+    <ThemeProvider value={DefaultTheme}>
+      <Tabs>
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Home',
+            tabBarIcon: IconHome,
+          }}
+        />
+        <Tabs.Screen
+          name="mybooks"
+          options={{
+            title: 'My Books',
+            tabBarIcon: IconBook,
+          }}
+        />
+      </Tabs>
+    </ThemeProvider>
   )
 }
 
@@ -48,3 +51,4 @@ const IconBook = ({ focused }) => {
     </Svg>
   )
 }
+export default AppLayout
