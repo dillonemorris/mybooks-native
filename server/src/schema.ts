@@ -4,8 +4,9 @@ const typeDefs = gql`
   type Book {
     id: ID!
     title: String!
-    authors: [String]!
-    imageUrl: String
+    author: Author!
+    description: String
+    coverImageUrl: String
     createdAt: String
     isFinished: Boolean
     finishedAt: String
@@ -16,6 +17,11 @@ const typeDefs = gql`
     pageCount: Int
   }
 
+  type Author {
+    name: String
+    photo: String
+  }
+
   type User {
     id: ID!
     email: String!
@@ -24,7 +30,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    books: [Book]!
+    books(query: String!): [Book]!
     book(id: ID!): Book
     me: User
   }

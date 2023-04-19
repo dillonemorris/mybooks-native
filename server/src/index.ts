@@ -1,8 +1,16 @@
 require('dotenv').config()
 const { ApolloServer } = require('apollo-server')
 const typeDefinitions = require('./schema')
+const BookAPI = require('./datasources/book')
+const resolvers = require('./resolvers')
 
-const server = new ApolloServer({ typeDefs: typeDefinitions })
+const server = new ApolloServer({
+  typeDefs: typeDefinitions,
+  resolvers,
+  dataSources: () => ({
+    bookAPI: new BookAPI(),
+  }),
+})
 
 server.listen().then(() => {
   console.log(`
