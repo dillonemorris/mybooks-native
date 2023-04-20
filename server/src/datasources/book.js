@@ -12,11 +12,11 @@ class BookAPI extends RESTDataSource {
     })
 
     return Array.isArray(response.docs)
-      ? response.docs.map(this.bookSearchReducer)
+      ? response.docs.map(this.bookReducer)
       : []
   }
 
-  bookSearchReducer(book) {
+  bookReducer(book) {
     const imageBaseUrl = 'https://covers.openlibrary.org/b/id'
     const coverImageUrl = book.cover_i
       ? `${imageBaseUrl}/${book.cover_i}-M.jpg`

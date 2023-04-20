@@ -1,27 +1,38 @@
 import { Tabs } from 'expo-router'
 import Svg, { Path } from 'react-native-svg'
 import { ThemeProvider, DefaultTheme } from '@react-navigation/native'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+
+const cache = new InMemoryCache()
+
+// Initialize Apollo Client
+const client = new ApolloClient({
+  uri: 'http://192.168.0.152:4000/graphql',
+  cache,
+})
 
 const AppLayout = () => {
   return (
-    <ThemeProvider value={DefaultTheme}>
-      <Tabs>
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: 'Home',
-            tabBarIcon: IconHome,
-          }}
-        />
-        <Tabs.Screen
-          name="mybooks"
-          options={{
-            title: 'My Books',
-            tabBarIcon: IconBook,
-          }}
-        />
-      </Tabs>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider value={DefaultTheme}>
+        <Tabs>
+          <Tabs.Screen
+            name="index"
+            options={{
+              title: 'Home',
+              tabBarIcon: IconHome,
+            }}
+          />
+          <Tabs.Screen
+            name="mybooks"
+            options={{
+              title: 'My Books',
+              tabBarIcon: IconBook,
+            }}
+          />
+        </Tabs>
+      </ThemeProvider>
+    </ApolloProvider>
   )
 }
 
@@ -51,4 +62,5 @@ const IconBook = ({ focused }) => {
     </Svg>
   )
 }
+
 export default AppLayout
